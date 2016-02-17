@@ -1,4 +1,4 @@
-# Jasmine README #
+# Using aXe in Jasmine Unit Tests #
 
 This example demonstrates how to use aXe with the Jasmine unit testing framework.
 
