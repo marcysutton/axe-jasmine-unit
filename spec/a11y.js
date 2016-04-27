@@ -23,6 +23,9 @@ describe('axe', function () {
 	it('should report that bad HTML is bad', function (done) {
 		var n = document.getElementById('broken');
 		axe.a11yCheck(n, null, function (result) {
+			if (result.violations.length > 0) {
+				console.log(JSON.stringify(result.violations));
+			}
 			expect(result.violations.length).toBe(1);
 			done();
 		});
