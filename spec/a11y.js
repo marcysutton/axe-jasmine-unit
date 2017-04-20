@@ -4,17 +4,14 @@ describe('axe', function () {
 	'use strict';
 
 	document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend',
-		'<div id="working">' +
-			'<label for="has-label">Label for this text field.</label>' +
-			'<input type="text" id="has-label">' +
-		'</div>' +
-		'<div id="broken">' +
-			'<p>Not a label</p><input type="text" id="no-label">' +
-		'</div>');
+      '<button id="taco-button">' +
+        'Coolest button ever' +
+      '</button>' +
+      '<fieldset id="broken"><input></fieldset>');
 
 	it('should report that good HTML is good', function (done) {
-		var n = document.getElementById('working');
-		axe.a11yCheck(n, null, function (result) {
+		var n = document.getElementById('taco-button');
+		axe.a11yCheck(n, {}, function (result) {
 			expect(result.violations.length).toBe(0);
 			done();
 		});
@@ -22,9 +19,9 @@ describe('axe', function () {
 
 	it('should report that bad HTML is bad', function (done) {
 		var n = document.getElementById('broken');
-		axe.a11yCheck(n, null, function (result) {
+		axe.run(n, {}, function (error, result) {
 			if (result.violations.length > 0) {
-				console.log(JSON.stringify(result.violations));
+				console.log(JSON.stringify(result.violations, null, 4));
 			}
 			expect(result.violations.length).toBe(1);
 			done();
